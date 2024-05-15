@@ -15,3 +15,12 @@
     echo "Seems like you found yourself in a place you shouldn't be. Nice try, though.";
     exit;
  }
+
+ //Setup.
+ define('UP_PLUGIN_DIR', plugin_dir_path(__FILE__));
+
+ //includes 
+include(UP_PLUGIN_DIR . 'includes/register-blocks.php');
+
+ //hooks
+ add_action('init', 'up_register_blocks');
