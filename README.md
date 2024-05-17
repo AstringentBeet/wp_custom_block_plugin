@@ -1,6 +1,15 @@
 # Custom Wordpress Block/Plugin Development
 ### Author: Alexander Effanga
 
+## Resource Log
+- [Wordpress' Official WordPress Block Development Document Site](https://developer.wordpress.org/block-editor/)
+- [Zac Gordon's guide to using registerBlockType() function](https://wp.zacgordon.com/2017/12/28/how-to-use-to-registerblocktype-to-create-blocks-in-wordpress/)
+- [wordpress official block file structure diagram (created with Excalidraw)](assets/images/wp_block_registration_diagram.png)
+- [Javascipt for Wordpress guid on block development (it seems a bit outdated, so proceed with caution)](https://javascriptforwp.com/wordpress-scripts-build-tool-tutorial/)
+- [Wordpress Block registration process diagram for both server-side and client-side](assets/images/wp_block_registration.webp)
+- [WordPress' official overview of `block.json`](https://developer.wordpress.org/block-editor/getting-started/fundamentals/block-json/)
+    - [Wordpress `block.json` file diagram](assets/images/wp_block-json_structure.webp)
+
 #### List of blocks that will be developed
 
 1. Fancy Header: A pretty straight-forward event-based feature that will simply animate an underline on a header when the user hover the mouse over it. 
@@ -54,7 +63,8 @@ So the majority of these modules are already within wordpress' core, using impor
 
 [Javascript for WordPress](https://javascriptforwp.com/wordpress-scripts-build-tool-tutorial/) also has a small tutorial that goes over this.
 
-Anyways `{registerBlockType}` as the name suggests, registers blocks (specifically block type) onto the gutenberg editor
+#### <span style = "color:#80b3ff"> Deep Dive: `{registerBlockType}`</span>
+Anyways `{registerBlockType}` as the name suggests, registers a block type on the server using the metadata stored in the `block.json` file.
 ```
 register_block_type
     ( 
@@ -81,3 +91,42 @@ As stated from [wordpress developer docs](https://developer.wordpress.org/block-
 
 Internationalization is the process to provide multiple language support to software, in this case WordPress. Internationalization is often abbreviated as i18n, where 18 stands for the number of letters between the first i and the last n.
 Providing i18n support to your plugin and theme allows it to reach the largest possible audience, even without requiring you to provide the additional language translations. When you upload your software to WordPress.org, all JS and PHP files will automatically be parsed. Any detected translation strings are added to translate.wordpress.org to allow the community to translate, ensuring WordPress plugins and themes are available in as many languages as possible.
+
+### 05/15/2024
+#### Understanding RichText
+The Rich Text package is designed to aid in the manipulation of plain text strings in order that they can represent complex formatting. It has a decent amount of components to further flesh out the 
+
+### 05/16/2024
+I spent a small amount of time following the course, but after filling out more of the block registration function, I decided to take a pause on the material and really look into the official documentation
+```
+import { registerBlockType } from '@wordpress/blocks'
+import block from './block.json';
+import {__} from '@wordpress/i18n'
+import { RichText } from '@wordpress/block-editor'
+
+registerBlockType(block.name, {
+    edit({attributes, setAttributes}) {
+        const {content} = attributes;
+
+        return (
+            <RichText
+                tagName ="h2" 
+                placeholder = {__('Enter Heading', 'udemy-plus')}
+                value = {content}
+                onChange={newVal => setAttributes({content: newVal})}
+            />
+        )
+    },
+});
+```
+Because although this may seem super basic to the average wordpress developer, I'm barely able to follow through.
+
+When registering a block with JavaScript on the client, the edit and save functions provide the interface for how a block is going to be rendered within the editor, how it will operate and be manipulated, and how it will be saved.
+
+### 05/17/2024
+#### <span style="color:#80b3ff">Client-Side Rendering</span>
+The `save` function is being introduced. I've through several documents about it, but what the function does is basically display what's already been added to the Gutenberg editor in the front-end. The edit function will create a component for editing the block, whereas the `save` function will create a component saved in the database
+
+Honestly, there was too much I did to fully write down, but to cut it short, the facny header block is complete. Onto Server-side Rendering...
+
+#### <span style="color:#80b3ff">Server-Side Rendering</span>
