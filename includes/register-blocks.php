@@ -5,6 +5,7 @@ function up_register_blocks () {
     $blocks = [
 
         ['name' => 'fancy-header'],
+        ['name' => 'search-form']
 
     ];
 

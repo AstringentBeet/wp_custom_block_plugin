@@ -11,9 +11,6 @@ registerBlockType(block.name, {
     edit({attributes, setAttributes}) {
         const {content, underline_color} = attributes;
         const blockProps = useBlockProps()
-
-        console.log(blockProps);
-
         return (
             <>
                 <InspectorControls>

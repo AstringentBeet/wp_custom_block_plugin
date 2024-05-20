@@ -13,7 +13,7 @@
 #### List of blocks that will be developed
 
 1. Fancy Header: A pretty straight-forward event-based feature that will simply animate an underline on a header when the user hover the mouse over it. 
-1. TBA
+1. Search Form Block: 
 
 ## Progress Log
 
@@ -94,7 +94,7 @@ Providing i18n support to your plugin and theme allows it to reach the largest p
 
 ### 05/15/2024
 #### Understanding RichText
-The Rich Text package is designed to aid in the manipulation of plain text strings in order that they can represent complex formatting. It has a decent amount of components to further flesh out the 
+The Rich Text package is designed to aid in the manipulation of plain text strings in order that they can represent complex formatting. [It has a decent amount of components to further](https://developer.wordpress.org/block-editor/reference-guides/richtext/) flesh out the content and features of the respective block.
 
 ### 05/16/2024
 I spent a small amount of time following the course, but after filling out more of the block registration function, I decided to take a pause on the material and really look into the official documentation
@@ -129,4 +129,27 @@ The `save` function is being introduced. I've through several documents about it
 
 Honestly, there was too much I did to fully write down, but to cut it short, the facny header block is complete. Onto Server-side Rendering...
 
+One thing I will mention just for the sake of documentation is the importance of the `useBlockProps` hook of the `block-editor` package. Once placed into the root element of prospective block, it communicates to wordpress to give it the proper markups to register it as a block. Doing so allows custom css attributes to be applied within the block. An excerpt from this [medium article](https://franky-arkon-digital.medium.com/gutenberg-tips-generate-your-blocks-class-name-using-useblockprops-aa77a98f4fd) details further below:
+>"but in order for the Gutenberg editor to know how to manipulate the block, add any extra classNames that are needed for the block… the block wrapper element should apply props retrieved from the useBlockProps react hook call"
+
 #### <span style="color:#80b3ff">Server-Side Rendering</span>
+##### Why use client-side rendering?
+- Client-side rendering is great for simple content that does not rely on external data
+- Great for blocks that require dynamic user interaction (animation, real-time-updates, etc)
+- Ideal for single page applications
+- Faster
+##### Why Server-Side rendering?
+- Server-side rendering is great for content that relies on external data.
+    - Take the site title for example. It can be prone to change based on what the site administrator chooses. So as long as the block can be prone to change, it's best to use server-side rendering.
+    - The block content is generated on the server using php prior to being sent to the user's browser
+
+### 05/18/2024
+Normally, Javascript doesn't support svg files, but webpack helps take care of it. The best way to add an svg file is through exporting it as a module
+```
+export default {
+    primary: <svg file>
+}
+```
+
+#### <span style="color:#80b3ff"> Quick Dive: PanelColorSettings </span>
+A wordpress component from the `block-editor` package that provides a color ipcker in the control panel, having the capability to hold multiple color pickers for different attributes (ie background and text colors). It can be used within `InspectorControls`. Wordpress' offical block editor handbook doesn't have details about it, but there are some details on it's direct [GitHub page](https://github.com/WordPress/gutenberg/blob/trunk/packages/block-editor/src/components/panel-color-settings/README.md)
