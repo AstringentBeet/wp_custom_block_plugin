@@ -153,3 +153,12 @@ export default {
 
 #### <span style="color:#80b3ff"> Quick Dive: PanelColorSettings </span>
 A wordpress component from the `block-editor` package that provides a color ipcker in the control panel, having the capability to hold multiple color pickers for different attributes (ie background and text colors). It can be used within `InspectorControls`. Wordpress' offical block editor handbook doesn't have details about it, but there are some details on it's direct [GitHub page](https://github.com/WordPress/gutenberg/blob/trunk/packages/block-editor/src/components/panel-color-settings/README.md)
+
+### 05/23/2024
+So far, I have established the basic front-end display of the search bar by utilizing php (because this will be used in a dynamic way). The lecture I just completed introduced a php concept known as 'output buffering', which temporaily saves information (usually html) until it is fully able to render (which the programmer has to specify when).
+#### <span style="color:#80b3ff">sanitizing vs escaping</span>
+Pretty short answer. Sanitizing is the process of securing/filtering/cleaning all input data as security measure from untrusted and potentially harmful sources. 
+Escaping output, on the other hand, is similar to sanitization, but focuses on stripping potentially malformed/unwatned output data
+Wordpress' [API Handbook's security section](https://developer.wordpress.org/apis/security/) details this further.
+
+**Side Note:** CSS class names for blocks always start with "wp-block". The rest are custom classes created by the user, so concantenate away.
