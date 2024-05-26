@@ -20,22 +20,11 @@
  define('UP_PLUGIN_DIR', plugin_dir_path(__FILE__));
 
  //includes 
-include(UP_PLUGIN_DIR . 'includes/register-blocks.php');
-include(UP_PLUGIN_DIR . 'includes/blocks/search-form.php');
+ $rootFiles = glob(UP_PLUGIN_DIR . 'includes/*.php');
+ $subDirectoryFiles = glob(UP_PLUGIN_DIR . 'includes/**/*.php');
+ $allFiles = array_merge($rootFiles, $subDirectoryFiles);
+
+ foreach ($allFiles as $fileName) include_once($fileName);
 
  //hooks
  add_action('init', 'up_register_blocks');
-
- /*
- <!DOCTYPE html>
- <html lang="en">
- <head>
-   <meta charset="UTF-8">
-   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <title>Document</title>
- </head>
- <body>
-   
- </body>
- </html>
- */

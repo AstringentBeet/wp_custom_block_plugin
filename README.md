@@ -162,3 +162,12 @@ Escaping output, on the other hand, is similar to sanitization, but focuses on s
 Wordpress' [API Handbook's security section](https://developer.wordpress.org/apis/security/) details this further.
 
 **Side Note:** CSS class names for blocks always start with "wp-block". The rest are custom classes created by the user, so concantenate away.
+
+### 05/25/2024
+Completed the search-form block, starting on the 'page header' block which also uses server-side rendering.
+
+#### Quick Update (13:18 CDT)
+Completed the page header, and now mmoving on to the next section: Authentication.
+
+### 05/26/2024
+Now that the page header tools block is complete (the block that will prompt users to sign in or register), it's now time to work on the authentication modal, or better known as the login/register portal.
