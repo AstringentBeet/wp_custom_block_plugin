@@ -170,4 +170,23 @@ Completed the search-form block, starting on the 'page header' block which also 
 Completed the page header, and now mmoving on to the next section: Authentication.
 
 ### 05/26/2024
-Now that the page header tools block is complete (the block that will prompt users to sign in or register), it's now time to work on the authentication modal, or better known as the login/register portal.
+Now that the page header tools block is complete (the block that will prompt users to sign in or register), it's now time to work on the authentication modal, or better known as the login/register portal. I find it interesting that the header tools block is a completely different block that the authentication modal. As Luis (the instructor) stated, users may not want to use the specific modal that we designed, so decoupling it would be the best way to go. Also, it may cause a bit of a mess if a single block had that many features.
+
+I'm using javascript to manage the modal in the front-end. So far, I have used it to make it not only visible, but to assign the dom objects different classes/id's to enable switching the tabs (for either signing up or signing in) back and forth. Right now, we're about to add rest api feature that (I assume) will take advantage of javascript's asynchronous feature. As of right now, the function:
+```
+signupForm.addEventListener('submit', event => {
+
+    event.preventDefault();
+    const signupFieldSet = signupForm.querySelector('fieldset');
+    signupFieldSet.setAttribute('disabled', true);
+
+    const signupStatus = signupForm.querySelector('#signup-status');
+    signupStatus.innerHTML = 
+    `
+        <div class = "modal-status modal-status-info">
+            All forms must be completed to create account.
+        </div>
+    `;
+})
+```
+Prevents the user from getting ahead of themselves by signing up without filling out the required fields. Looking at the current pace of this section, I'm assuming we're going to apply the asynchronous features that'll utilize rest API to communicate to the backend (specifically databases). Maybe I'm getting ahead of myself, or maybe I might be fucking onto something...time will telll.

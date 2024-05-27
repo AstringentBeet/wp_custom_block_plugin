@@ -7,7 +7,7 @@
 <?php
         if($atts['showAuth']) {
 ?>
-        <div "wp-block-udemy-plus-header-tools">
+        <div class = "wp-block-udemy-plus-header-tools">
             <a class="signin-link open-modal" href="#">
             <div class="signin-icon">
                 <i class="bi bi-person-circle"></i>

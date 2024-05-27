@@ -4,7 +4,7 @@
     "name": "udemy-plus/header-tools",
     "title": "Header Tools",
     "category": "text",
-    "icon": "admin-tools",
+    "icon": "admin-users",
     "description": "Adds a header toolbar that contains an authentication link",
     "textdomain": "udemy-plus",
     "attributes": {
