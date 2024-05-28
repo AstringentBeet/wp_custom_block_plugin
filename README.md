@@ -9,6 +9,11 @@
 - [Wordpress Block registration process diagram for both server-side and client-side](assets/images/wp_block_registration.webp)
 - [WordPress' official overview of `block.json`](https://developer.wordpress.org/block-editor/getting-started/fundamentals/block-json/)
     - [Wordpress `block.json` file diagram](assets/images/wp_block-json_structure.webp)
+### REST API
+- [Wordpress API Handbook: Key Concepts](https://developer.wordpress.org/rest-api/key-concepts/)
+- [Free Code Camp's guide to understanding REST api](https://www.freecodecamp.org/news/how-to-use-rest-api/)
+- [stack exchange website detailing the parameters for the `register_rest_route()` function](https://wordpress.stackexchange.com/questions/407287/full-documentation-about-args-for-register-rest-route)
+- [A simpler overview of the custom endpoint development](https://dev.to/david_woolf/how-to-create-your-own-rest-routes-in-wordpress-32og)
 
 #### List of blocks that will be developed
 
@@ -190,3 +195,14 @@ signupForm.addEventListener('submit', event => {
 })
 ```
 Prevents the user from getting ahead of themselves by signing up without filling out the required fields. Looking at the current pace of this section, I'm assuming we're going to apply the asynchronous features that'll utilize rest API to communicate to the backend (specifically databases). Maybe I'm getting ahead of myself, or maybe I might be fucking onto something...time will telll.
+
+### 05/27/2024
+We're now going over REST api, which was always a bit of a hassle to wrap my head around. 
+But APIs, are a set of representational protocols utilized for different software's to communicate with each other. 
+The REST API uses four methods that uses CRUD operations: **CREATE**(POST) **READ**(GET) **UPDATE**(PUT/POST/PATCH) **DELETE**()
+- **Routes** are URIs which can be mapped to different HTTP methods.
+    - Basically URLs.
+- **Endpoints** are the mapping of individual HTTP methods to a route.
+    - Basically CRUD methods applied to routes.
+
+Wordpress only grants creating users to administrators due to security risks. To enable annonymous users to create an account and login, creating a custom endpoint seems to be the way to go.
