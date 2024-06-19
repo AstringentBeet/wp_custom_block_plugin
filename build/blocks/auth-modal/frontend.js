@@ -39,7 +39,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   });
-  signupForm.addEventListener('submit', event => {
+  signupForm.addEventListener('submit', async event => {
     event.preventDefault();
     const signupFieldSet = signupForm.querySelector('fieldset');
     signupFieldSet.setAttribute('disabled', true);
@@ -49,6 +49,34 @@ document.addEventListener('DOMContentLoaded', () => {
                 All forms must be completed to create account.
             </div>
         `;
+    const formData = {
+      username: signupForm.querySelector('#su-name').value,
+      email: signupForm.querySelector('#su-email').value,
+      password: signupForm.querySelector('#su-password').value
+    };
+    const response = await fetch(up_auth_rest.signup, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(formData)
+    });
+    const responseJSON = await response.json();
+    if (responseJSON === 2) {
+      `
+            <div class="modal-status modal-status-success>
+                Success! Your account has been created.
+            </div>
+        `;
+      location.reload();
+    } else {
+      signupFieldSet.removeAttribute('disabled');
+      signupStatus.innerHTML = `
+                <div class = "modal-status modal-status-danger">
+                    Unable to create account! Please try again later.
+                </div>
+            `;
+    }
   });
 });
 /******/ })()

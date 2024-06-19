@@ -206,3 +206,13 @@ The REST API uses four methods that uses CRUD operations: **CREATE**(POST) **REA
     - Basically CRUD methods applied to routes.
 
 Wordpress only grants creating users to administrators due to security risks. To enable annonymous users to create an account and login, creating a custom endpoint seems to be the way to go.
+
+### 06/01/2024
+Designed for sending data from webpages, REST API holds information in a way similar to an HTML document, most notably using a Header and Body.
+- Headers Store meta information, such as:
+    - IP
+    - Browser information
+    - HTTP methods used
+- Bodys store data that the website, mores sepcifcially the user, will use/see
+    - Form Content
+    - General Content
