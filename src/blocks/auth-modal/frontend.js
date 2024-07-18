@@ -70,11 +70,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const responseJSON = await response.json();
 
-        if(responseJSON === 2) { `
-            <div class="modal-status modal-status-success>
+        if(responseJSON === 2) { 
+            signupStatus.innerHTML = 
+            `<div class="modal-status modal-status-success">
                 Success! Your account has been created.
-            </div>
-        `
+            </div>`
         location.reload();
         } else {
             signupFieldSet.removeAttribute('disabled')
@@ -83,6 +83,51 @@ document.addEventListener('DOMContentLoaded', () => {
                     Unable to create account! Please try again later.
                 </div>
             `
+        }
+    })
+    
+    signinForm.addEventListener('submit', async event => {
+        event.preventDefault();
+
+        const signinFieldSet = document.querySelector('fieldset');
+        const signinStatus = document.querySelector('#signin-status');
+
+        signinFieldSet.setAttribute('disabled', true);
+
+        signinStatus.innerHTML = 
+        `
+            <div class = "modal-status modal-status-info">
+                Please wait! We're logging you in.
+            </div>
+        `;
+
+        const formData = {
+            user_login: signinForm.querySelector('#si-login').value,
+            password: signinForm.querySelector('#si-password').value
+        };
+
+        const response = await fetch(up_auth_rest.signin, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(formData)
+        });
+
+        const responseJSON = await response.json();
+
+        if(responseJSON.status === 2) {
+            signinStatus.innerHTML =
+            `<div class="modal-status modal-status-success">
+                Success! You're now logged in.
+            </div>`
+        location.reload();
+        } else {
+            signinFieldSet.removeAttribute('disabled');
+            signinStatus.innerHTML =
+            `<div class="modal-status modal-status-danger">
+                Ya done fucked up a-aron.
+            </div>`
         }
     })
 });

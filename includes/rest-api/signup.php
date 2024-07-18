@@ -1,6 +1,7 @@
 <?php
 
     //This will handle the responses to our endpoint
+    //In addition, this validates the
     function up_rest_api_signup_handler($request) {
         $response = ['status' => 1];
         $params = $request->get_json_params();
@@ -10,7 +11,8 @@
            empty($params["username"]) ||
            empty($params["password"])
         ) {
-            return $response;
+            $response['error'] = 'Missing required fields';
+            return $response['error'];
         }
 
         $email = sanitize_email($params['email']);
@@ -18,11 +20,21 @@
         $password = sanitize_text_field($params['password']);
 
         /** prevents a duplicate username and/or email from registering **/
-        if(
-            username_exists( $username ) || 
-            !is_email($email) ||
-            email_exists( $email )
-        ) return $response;  
+
+        if(username_exists($username)) {
+            $response['error'] = 'username already exists';
+            return $response;
+        }
+
+        if(!is_email($email)) {
+            $response['error'] = 'invalid email';
+            return $response;
+        }
+
+        if(email_exists( $email )) {
+            $response['error'] = 'email already exists';
+            return $response;
+        }
 
         $userID = wp_insert_user([
             'user_login' => $username,
@@ -31,6 +43,7 @@
         ]);
 
         if(is_wp_error($userID)) {
+            $response['error'] = $userID->get_error_message();
             return $response;
         }
 

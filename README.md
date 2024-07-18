@@ -12,9 +12,10 @@
 ### REST API
 - [Wordpress API Handbook: Key Concepts](https://developer.wordpress.org/rest-api/key-concepts/)
 - [Free Code Camp's guide to understanding REST api](https://www.freecodecamp.org/news/how-to-use-rest-api/)
+- [A good look into Wordpress' endpoint core and reasons to create a custom endpoint](https://wordpresswhispers.com/a-deep-dive-into-wordpress-rest-api-endpoints/)
 - [stack exchange website detailing the parameters for the `register_rest_route()` function](https://wordpress.stackexchange.com/questions/407287/full-documentation-about-args-for-register-rest-route)
 - [A simpler overview of the custom endpoint development](https://dev.to/david_woolf/how-to-create-your-own-rest-routes-in-wordpress-32og)
-
+- [In case you get confused as to how the request is sent to the server endpoint thanks to the front-end](https://developer.wordpress.org/reference/hooks/wp_enqueue_scripts/)
 #### List of blocks that will be developed
 
 1. Fancy Header: A pretty straight-forward event-based feature that will simply animate an underline on a header when the user hover the mouse over it. 
@@ -196,6 +197,8 @@ signupForm.addEventListener('submit', event => {
 ```
 Prevents the user from getting ahead of themselves by signing up without filling out the required fields. Looking at the current pace of this section, I'm assuming we're going to apply the asynchronous features that'll utilize rest API to communicate to the backend (specifically databases). Maybe I'm getting ahead of myself, or maybe I might be fucking onto something...time will telll.
 
+There is a small detail that I forgot to mention in regards to fully connect the front-end to the server endpoint.
+
 ### 05/27/2024
 We're now going over REST api, which was always a bit of a hassle to wrap my head around. 
 But APIs, are a set of representational protocols utilized for different software's to communicate with each other. 
@@ -216,3 +219,114 @@ Designed for sending data from webpages, REST API holds information in a way sim
 - Bodys store data that the website, mores sepcifcially the user, will use/see
     - Form Content
     - General Content
+
+### 07/15/2024
+discrepencies found between `signup.php` and `signin.php` ~
+
+`signup.php`:
+```
+$userID = wp_insert_user([
+    'user_login' => $username,
+    'user_email' => $email,
+    'user_pass' => $password
+]);
+```
+
+`signin.php`:
+```
+$email = sanitize_email($params['user_login']);
+$password = sanitize_text_field($params['password']);
+
+$user = wp_signon([
+    'user_login' => $email,
+    'user_password' => $password,
+    'remember' => true
+]);
+```
+
+For full context, here is the complete file for `signin.php`:
+```
+<?php
+
+    function up_rest_api_signin_handler($request) {
+        $response = ['status' => 1];
+        $params = $request->get_json_params();
+
+        if(!isset($params['user_login'], $params['password']) || 
+        empty($params['user_login']) ||
+        empty($params['password'])
+     ) {
+         return $response;
+     }
+
+    $email = sanitize_email($params['user_login']);
+    $password = sanitize_text_field($params['password']);
+
+    $user = wp_signon([
+        'user_login' => $email,
+        'user_password' => $password,
+        'remember' => true
+    ]);
+
+    if(is_wp_error($user)) {
+        return $response;
+    }
+     $response['status'] = 2;
+     return $response;
+    }
+```
+
+I'm not exactly sure why there's a difference between user login information between the two forms, so I'm going ot take executive action and have user_login information to match by using the user's email as the login.
+
+`signin.php`:
+```
+<?php
+
+    function up_rest_api_signin_handler($request) {
+        $response = ['status' => 1];
+        $params = $request->get_json_params();
+
+        if(!isset($params['login'], $params['password']) || 
+        empty($params['login']) ||
+        empty($params['password'])
+     ) {
+        $response['error'] = 'Missing login or password';
+         return $response;
+     }
+
+    $login = $params['login'];
+    $password = sanitize_text_field($params['password']);
+
+    if(is_email($login)) {
+        $login = sanitize_email($login);
+        $user = get_user_by('email', $login);
+        if ($user) {
+            $login = $user->user_login; // Get the actual username
+        } else {
+            $response['error'] = 'Email not found';
+            return $response;
+        }
+    } else {
+        $login = sanitize_text_field($login); // Sanitize as a text field if it's not an email
+    }
+
+    $user = wp_signon([
+        'user_login' => $login,
+        'user_password' => $password,
+        'remember' => true
+    ]);
+
+    if(is_wp_error($user)) {
+        $response['error'] = $user->get_error_message();
+        return $response;
+    }
+
+     $response['status'] = 2;
+     return $response;
+    }
+
+```
+This not only helps reduce the confusion in the parameters and login information, but adds flexibility for the user. The block is missing a few key elements that I plan on adding to make it feel more like a complete block, namely the option to log out. I'll add this later down the road once the course is finished.
+
+### 07/18/2024
+Now registering a custom post type.

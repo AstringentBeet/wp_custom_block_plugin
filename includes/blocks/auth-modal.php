@@ -40,7 +40,7 @@
                 <div id="signin-status"></div>
                 <fieldset>
                     <label>Name/Email</label>
-                    <input type="text" id="si-email" placeholder="johndoe@example.com" />
+                    <input type="text" id="si-login" placeholder="johndoe@example.com" />
 
                     <label>Password</label>
                     <input type="password" id="si-password" />
