@@ -27,9 +27,16 @@
  foreach ($allFiles as $fileName) include_once($fileName);
 
  //hooks
+ register_activation_hook(__FILE__, 'up_activate_plugin');
  //'init' is used to initiate hooks after most of wp has been loaded with the exception of headers.
  add_action('init', 'up_register_blocks');
  add_action('rest_api_init', 'up_rest_api_init');
  //queues scripts for the front-end.
  add_action('wp_enqueue_scripts', 'up_enqueue_scripts');
+
+ /**** CUSTOM POST TYPE *****/
  add_action('init', 'up_recipe_post_type');
+ add_action('cuisine_add_form_fields', 'up_cuisine_add_form_fields');
+ add_action('create_cuisine', 'up_save_cuisine_meta');
+ add_action('cuisine_edit_form_fields', 'up_cuisine_edit_form_fields');
+ add_action('edited_cuisine', 'up_save_cuisine_meta');

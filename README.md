@@ -329,4 +329,4 @@ I'm not exactly sure why there's a difference between user login information bet
 This not only helps reduce the confusion in the parameters and login information, but adds flexibility for the user. The block is missing a few key elements that I plan on adding to make it feel more like a complete block, namely the option to log out. I'll add this later down the road once the course is finished.
 
 ### 07/18/2024
-Now registering a custom post type.
+Now registering a custom post type. I worked on custom post-types from a previous course (that I need to push onto my repository), so thw information gained from this won't be entirely new.
