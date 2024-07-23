@@ -21,7 +21,12 @@
   "author": "Some Rando",
   "license": "ISC",
   "devDependencies": {
-    "@wordpress/scripts": "^27.8.0"
+    "@wordpress/scripts": "^28.3.0"
+  },
+  "dependencies": {
+    "@emotion/cache": "^11.13.0",
+    "@emotion/react": "^11.13.0",
+    "@emotion/styled": "^11.13.0",
+    "@mui/material": "^5.16.4"
   }
 }
-
