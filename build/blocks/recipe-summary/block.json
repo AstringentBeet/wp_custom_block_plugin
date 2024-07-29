@@ -22,5 +22,6 @@
   "style": "file:./index.css",
   "usesContext": [
     "postId"
-  ]
+  ],
+  "script": "file:./frontend.js"
 }
