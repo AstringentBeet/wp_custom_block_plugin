@@ -16,6 +16,7 @@
 - [stack exchange website detailing the parameters for the `register_rest_route()` function](https://wordpress.stackexchange.com/questions/407287/full-documentation-about-args-for-register-rest-route)
 - [A simpler overview of the custom endpoint development](https://dev.to/david_woolf/how-to-create-your-own-rest-routes-in-wordpress-32og)
 - [In case you get confused as to how the request is sent to the server endpoint thanks to the front-end](https://developer.wordpress.org/reference/hooks/wp_enqueue_scripts/)
+- [More info on how to crop a custom image](https://darkroomphotos.com/wordpress-thumbnail-crop/)
 #### List of blocks that will be developed
 
 1. Fancy Header: A pretty straight-forward event-based feature that will simply animate an underline on a header when the user hover the mouse over it. 
