@@ -204,7 +204,7 @@ __webpack_require__.r(__webpack_exports__);
           template: [['udemy-plus/team-member', {
             name: 'John Doe',
             title: 'CEO of Sex',
-            bio: 'I make that shit stinky, ya hurd'
+            bio: 'I make that shit stinky, shawty'
           }], ['udemy-plus/team-member'], ['udemy-plus/team-member']]
         })
       })]

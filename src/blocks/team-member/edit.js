@@ -11,12 +11,14 @@ import {
     PanelBody,
     TextareaControl, 
     Spinner,
-    ToolbarButton
+    ToolbarButton,
+    Tooltip,
+    Icon
   } from '@wordpress/components';
   import { isBlobURL, revokeBlobURL } from '@wordpress/blob';
   import { useState } from '@wordpress/element'
 
-export default function({ attributes, setAttributes }) {
+export default function({ attributes, setAttributes, context }) {
 
     const { 
       name, title, bio, imgID, imgAlt, imgURL, socialHandles
@@ -44,6 +46,7 @@ export default function({ attributes, setAttributes }) {
           revokeBlobURL(imgPreview)
         }
        setImgPreview(newImgUrl)
+       console.log(img)
     }
 
     const selectURL = url => {
@@ -54,6 +57,8 @@ export default function({ attributes, setAttributes }) {
         })
         setImgPreview(url)
     }
+
+    const imageClass = `wp-image-${imgID} img-${context["udemy-plus/image-shape"]}`;
 
     return (
       <>
@@ -87,22 +92,26 @@ export default function({ attributes, setAttributes }) {
         }
         <InspectorControls>
           <PanelBody title={__('Settings', 'udemy-plus')}>
-            <TextareaControl 
-              label={__('Alt Attribute', 'udemy-plus')}
-              value={imgAlt}
-              onChange={imgAlt => setAttributes({imgAlt})}
-              help={__(
-                'Description of your image for screen readers.',
-                'udemy-plus'
-              )}
-            />
+            {
+                imgPreview && !isBlobURL(imgPreview) && (
+                <TextareaControl 
+                    label={__('Alt Attribute', 'udemy-plus')}
+                    value={imgAlt}
+                    onChange={imgAlt => setAttributes({imgAlt})}
+                    help={__(
+                        'Description of your image for screen readers.',
+                        'udemy-plus'
+                    )}
+                />
+                )
+            }
           </PanelBody>
         </InspectorControls>
 
         <div {...blockProps}>
           <div className="author-meta">
 
-            { imgPreview && <img src={imgPreview} alt={imgAlt} /> }
+            { imgPreview && <img src={imgPreview} alt={imgAlt} className={imageClass}/> }
             { isBlobURL(imgPreview) && <Spinner/> }
 
             <MediaPlaceholder 
@@ -138,7 +147,31 @@ export default function({ attributes, setAttributes }) {
               value={bio}
             />
           </div>
-          <div className="social-links"></div>
+          <div className="social-links">
+            {socialHandles.map((handle, index) => {
+                return( 
+                <a href={handle.url} key={index}>
+                    <i className={`bi bi-${handle.icon}`}></i>
+                </a>
+            )})}
+            <Tooltip text={__('Add Social Media Handle', 'udemy-plus')}>
+                <a href="#" onClick={event => {
+                    event.preventDefault()
+                    setAttributes({
+                        socialHandles: [...socialHandles,
+                            {
+                                icon: "question",
+                                url: ""
+                            },
+                        ] 
+                    })
+                }}>
+                <Icon icon="plus" />
+                </a>
+            </Tooltip> 
+
+            
+          </div>
         </div>
       </>
     );

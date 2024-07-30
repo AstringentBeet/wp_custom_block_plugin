@@ -50,7 +50,7 @@ registerBlockType('udemy-plus/team-members-group', {
               {
                 name: 'John Doe',
                 title: 'CEO of Sex',
-                bio: 'I make that shit stinky, ya hurd'
+                bio: 'I make that shit stinky, shawty'
               }
             ],
               ['udemy-plus/team-member'],
