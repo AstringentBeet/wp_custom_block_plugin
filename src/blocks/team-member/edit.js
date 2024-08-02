@@ -13,7 +13,9 @@ import {
     Spinner,
     ToolbarButton,
     Tooltip,
-    Icon
+    Icon,
+    TextControl,
+    Button
   } from '@wordpress/components';
   import { isBlobURL, revokeBlobURL } from '@wordpress/blob';
   import { useState } from '@wordpress/element'
@@ -59,6 +61,11 @@ export default function({ attributes, setAttributes, context, isSelected }) {
     }
 
     const imageClass = `wp-image-${imgID} img-${context["udemy-plus/image-shape"]}`;
+
+    const [activeSocialLink, setActiveSocialLink] =useState(null);
+    setAttributes({
+        imageShape: context['udemy-plus/image-shape']
+    })
 
     return (
       <>
@@ -150,7 +157,11 @@ export default function({ attributes, setAttributes, context, isSelected }) {
           <div className="social-links">
             {socialHandles.map((handle, index) => {
                 return( 
-                <a href={handle.url} key={index}>
+                <a href={handle.url} key={index} onClick={event => {
+                    event.preventDefault();
+                    setActiveSocialLink(activeSocialLink === index ? null : index);
+                }}
+                className = {activeSocialLink === index && isSelected ? "is-active" : ""}>
                     <i className={`bi bi-${handle.icon}`}></i>
                 </a>
             )})}
@@ -167,12 +178,56 @@ export default function({ attributes, setAttributes, context, isSelected }) {
                                 },
                             ] 
                         })
-                    }}>
+                        setActiveSocialLink(socialHandles.length);
+                    }}
+                    >
                     <Icon icon="plus" />
                     </a>
             </Tooltip> 
             }         
           </div>
+          {
+            isSelected && activeSocialLink !== null &&
+            <div className="team-member-social-edit-ctr">
+                <TextControl 
+                    label={__('URL', 'udemy-plus')}
+                    value={socialHandles[activeSocialLink].url}
+                    onChange={(url)=>{
+                        const tempLink = {...socialHandles[activeSocialLink]}
+                        const tempSocial = [...socialHandles]
+
+                        tempLink.url = url;
+                        tempSocial[activeSocialLink] = tempLink;
+
+                        setAttributes({socialHandles: tempSocial})
+                    }}
+                />
+                <TextControl 
+                    label={__('Icon', 'udemy-plus')}
+                    value={socialHandles[activeSocialLink].icon}
+                    onChange={(icon)=>{
+                        const tempLink = {...socialHandles[activeSocialLink]}
+                        const tempSocial = [...socialHandles]
+
+                        tempLink.icon = icon;
+                        tempSocial[activeSocialLink] = tempLink;
+
+                        setAttributes({socialHandles: tempSocial})
+                    }}
+                />
+                <Button 
+                 isDestructive 
+                 onClick={() => {
+                    const tempCopy = [...socialHandles];
+                    tempCopy.splice(activeSocialLink, 1);
+
+                    setAttributes({socialHandles: tempCopy});
+                    setActiveSocialLink(null);
+                 }}>
+                    {__('Remove', 'udemy-plus')}
+                </Button>
+            </div>
+          }
         </div>
       </>
     );

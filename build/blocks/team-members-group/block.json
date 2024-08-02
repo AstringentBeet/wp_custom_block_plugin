@@ -21,5 +21,30 @@
   "style": "file:./index.css",
   "providesContext": {
     "udemy-plus/image-shape": "imageShape"
+  },
+  "example": {
+    "attributes": {
+      "columns": 2
+    },
+    "innerBlocks": [
+      {
+        "name": "udemy-plus/team-member",
+        "attributes": {
+          "name": "John Doe",
+          "title": "CEO of Food",
+          "bio": "a-haha damn shawty you know what it is.",
+          "imgURL": "https://fastly.picsum.photos/id/281/4928/3264.jpg?hmac=0XHN8kT-vNOM5Sl2vfxmJk0uWAbHSj5EUMAO9eQ0XFM"
+        }
+      },
+      {
+        "name": "udemy-plus/team-member",
+        "attributes": {
+          "name": "Jane Doe",
+          "title": "CEO of Water",
+          "bio": "God I miss Athens.",
+          "imgURL": "https://fastly.picsum.photos/id/64/4326/2884.jpg?hmac=9_SzX666YRpR_fOyYStXpfSiJ_edO3ghlSRnH2w09Kg"
+        }
+      }
+    ]
   }
 }
