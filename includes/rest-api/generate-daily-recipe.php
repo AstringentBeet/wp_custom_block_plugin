@@ -8,6 +8,7 @@ function up_generate_daily_recipe() {
          ORDER BY RAND() LIMIT 1"
     );
 
+    //https://developer.wordpress.org/apis/transients/
     set_transient('up_daily_recipe_id', $id, DAY_IN_SECONDS);
     return $id;
 }
