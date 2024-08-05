@@ -40,6 +40,7 @@ function up_recipe_post_type() {
 		'has_archive'        => true,
 		'hierarchical'       => false,
 		'menu_position'      => 20,
+		'menu_icon'		 => 'dashicons-food',
 		'supports'           => array( 'title', 'editor', 'author', 'thumbnail', 'excerpt', 'custom-fields'),
         'show_in_rest'       => true,
         'description'        => __('A custom post type for recipes', 'udemy-plus'),
