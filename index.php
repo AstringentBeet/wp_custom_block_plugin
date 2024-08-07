@@ -18,7 +18,7 @@ if(!function_exists('add_action')) {
 
 //Setup.
 define('UP_PLUGIN_DIR', plugin_dir_path(__FILE__));
-
+define('UP_PLUGIN_FILE', __FILE__);
 //includes 
 $rootFiles = glob(UP_PLUGIN_DIR . 'includes/*.php');
 $subDirectoryFiles = glob(UP_PLUGIN_DIR . 'includes/**/*.php');
@@ -49,3 +49,7 @@ add_action('after_setup_theme', 'up_setup_theme');
 add_filter('image_size_names_choose', 'up_custom_image_sizes');
 //https://developer.wordpress.org/reference/hooks/rest_this-post_type_query/
 add_filter('rest_recipe_query', 'up_rest_recipe_query', 10, 2);
+add_action('admin_menu', 'up_admin_menus');
+add_action('admin_post_up_save_options', 'up_save_options');
+add_action('admin_enqueue_scripts', 'up_admin_enqueue');
+add_action('init', 'up_register_assets');

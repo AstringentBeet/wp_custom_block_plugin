@@ -21,4 +21,18 @@ function up_activate_plugin() {
     require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
 
     dbDelta($sql);
+
+    //https://ogp.me/
+    //Basically allows parts of your website to be previewable by turning it into a graph.
+    // read the rest by visiting the link; I'm exhausted...
+    $options = get_option('up_options');
+
+    if(!$options) {
+        add_option('up_options', [
+            'og_title'  =>  get_bloginfo('name'),
+            'og_img'    =>  '',
+            'og_description'    =>  get_bloginfo('description'),
+            'enable_og'   =>    1
+        ]);
+    }
 }
