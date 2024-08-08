@@ -53,3 +53,4 @@ add_action('admin_menu', 'up_admin_menus');
 add_action('admin_post_up_save_options', 'up_save_options');
 add_action('admin_enqueue_scripts', 'up_admin_enqueue');
 add_action('init', 'up_register_assets');
+add_action('admin_init', 'up_settings_api');

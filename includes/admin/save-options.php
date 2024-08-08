@@ -12,10 +12,10 @@ function up_save_options() {
     $options = get_option('up_options');
 
     $options['og_title'] = sanitize_text_field($_POST['up_og_title']);
-    $options['og_img'] = sanitize_url($_POST['up_og_img']);
+    $options['og_img'] = sanitize_url($_POST['up_og_image']);
     $options['og_description'] = sanitize_text_field($_POST['up_og_description']);
     $options['enable_og'] = absint($POST['up_enable_og']);
 
     update_option('up_options', $options);
-    wp_redirect(admin_url('admin.php?page=up_plugin_options&status=1'));
+    wp_redirect(admin_url('admin.php?page=up-plugin-options&status=1'));
 }

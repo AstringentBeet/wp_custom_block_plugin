@@ -4,7 +4,7 @@
 function up_register_assets() {
     wp_register_style(
         'up_admin',
-        plugins_url('/build/admin/main.css', UP_PLUGIN_FILE),
+        plugins_url('/build/admin/index.css', UP_PLUGIN_FILE),
     );
 
     $adminAssets = include(UP_PLUGIN_DIR . 'build/admin/index.asset.php');

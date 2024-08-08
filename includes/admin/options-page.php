@@ -52,7 +52,7 @@ function up_plugins_options_page() {
                     <input type="hidden" name="up_og_image" id="up_og_image"
                     value="<?php echo esc_attr($options['og_img']); ?>"
                     />
-                    <img id="og-img-preview" src="<?php esc_attr($options['og_img']); ?>">
+                    <img id="og-img-preview" src="<?php echo esc_attr($options['og_img']); ?>">
                     <a href="#" class="button-primary" id="og-img-btn">
                         Select Image
                     </a>
