@@ -1,6 +1,6 @@
 <?php
 
-function up_recipe_post_type() {
+function up_register_custom_post_type() {
     $recipe_tag_labels = array(
 		'name'                  => _x( 'Recipes', 'Post type general name', 'udemy-plus' ),
 		'singular_name'         => _x( 'Recipe', 'Post type singular name', 'udemy-plus' ),
@@ -96,5 +96,50 @@ function up_recipe_post_type() {
 		'single'	=>	true,
 		'default'	=>	0,
 		'show_in_rest'	=>	true
+	]);
+
+	register_post_meta('', 'og_title', [
+		'single' => true,
+		'type' => 'string',
+		'show_in_rest' => true,
+		'sanitize_callback' => 'sanitize_text_field',
+		'auth_callback' => function() {
+			return current_user_can('edit_posts');
+		}
+	]);
+
+//New Custom post types for Udemy Plus plugin. This will add more field options and meta data
+//for open graph previews.
+//refer to section 16.
+
+	register_post_meta('', 'og_description', [
+		'single' => true,
+		'type' => 'string',
+		'show_in_rest' => true,
+		'sanitize_callback' => 'sanitize_text_field',
+		'auth_callback' => function() {
+			return current_user_can('edit_posts');
+		}
+	]);
+
+	register_post_meta('', 'og_image', [
+		'single' => true,
+		'type' => 'string',
+		'show_in_rest' => true,
+		'sanitize_callback' => 'sanitize_text_field',
+		'auth_callback' => function() {
+			return current_user_can('edit_posts');
+		}
+	]);
+
+	register_post_meta('', 'og_override_image', [
+		'single' => true,
+		'type' => 'boolean',
+		'default' => false,
+		'show_in_rest' => true,
+		'sanitize_callback' => 'sanitize_text_field',
+		'auth_callback' => function() {
+			return current_user_can('edit_posts');
+		}
 	]);
 }

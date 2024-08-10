@@ -45,7 +45,6 @@ registerBlockType('udemy-plus/popular-recipes', {
       [count, cuisineIDs]
     );
 
-    console.log(posts);
 
     return (
       <>

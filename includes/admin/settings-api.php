@@ -1,6 +1,7 @@
 <?php
 
 //https://developer.wordpress.org/plugins/settings/settings-api/
+//https://developer.wordpress.org/apis/options/
 function up_settings_api() {
     register_setting('up_options_group', 'up_options');
 

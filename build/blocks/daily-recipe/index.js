@@ -292,14 +292,43 @@ __webpack_require__.r(__webpack_exports__);
       img: null,
       title: null
     });
-    (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.useEffect)(async () => {
-      const response = await _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_3__({
-        path: 'up/v1/daily-recipe'
+
+    /*useEffect(async () => {
+      const response = await apiFetch({
+        path: 'up/v1/daily-recipe',
       });
-      setPost({
+       setPost({
         isLoading: false,
         ...response
       });
+     }, []) */
+
+    (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.useEffect)(() => {
+      let isMounted = true;
+      const fetchPost = async () => {
+        try {
+          const response = await _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_3__({
+            path: 'up/v1/daily-recipe'
+          });
+          if (isMounted) {
+            setPost({
+              isLoading: false,
+              ...response
+            });
+          }
+        } catch (error) {
+          if (isMounted) {
+            setPost({
+              isLoading: false
+            });
+            console.error("failed to fetch post", error);
+          }
+        }
+      };
+      fetchPost();
+      return () => {
+        isMounted = false;
+      };
     }, []);
     return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)("div", {
       ...blockProps,

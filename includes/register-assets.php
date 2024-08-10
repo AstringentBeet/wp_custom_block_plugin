@@ -16,4 +16,14 @@ function up_register_assets() {
         $adminAssets['version'],
         true
     );
+
+    $editor_asset = include(UP_PLUGIN_DIR . 'build/block-editor/index.asset.php');
+
+    wp_register_script(
+        'up_editor',
+        plugins_url('/build/block-editor/index.js', UP_PLUGIN_FILE),
+        $editor_asset['dependencies'],
+        $editor_asset['version'],
+        true
+    );
 }

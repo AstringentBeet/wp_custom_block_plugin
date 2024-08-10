@@ -22,7 +22,9 @@ registerBlockType('udemy-plus/daily-recipe', {
       title: null,
     })
 
-    useEffect(async () => {
+
+
+    /*useEffect(async () => {
       const response = await apiFetch({
         path: 'up/v1/daily-recipe',
       });
@@ -32,8 +34,41 @@ registerBlockType('udemy-plus/daily-recipe', {
         ...response
       });
 
-    }, [])
-        
+    }, []) */
+      
+    useEffect(() => {
+      let isMounted = true;
+
+      const fetchPost = async() => {
+        try {
+          const response = await apiFetch({
+            path: 'up/v1/daily-recipe',
+          });
+
+          if(isMounted){
+            setPost({
+              isLoading: false,
+              ...response,
+            })
+          }
+        }
+        catch(error) {
+          if(isMounted) {
+            setPost({
+              isLoading: false
+            });
+            console.error("failed to fetch post", error);
+          }
+        }
+      };
+
+      fetchPost();
+
+      return () => {
+        isMounted = false;
+      }
+      }, []);
+
     return (
       <div {...blockProps}>
         <RichText

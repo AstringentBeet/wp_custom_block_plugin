@@ -36,7 +36,7 @@ add_action('wp_enqueue_scripts', 'up_enqueue_scripts');
 
 /**** CUSTOM POST TYPE *****/
 //jfc there are so many functions required for this.
-add_action('init', 'up_recipe_post_type');
+add_action('init', 'up_register_custom_post_type');
 add_action('cuisine_add_form_fields', 'up_cuisine_add_form_fields');
 add_action('create_cuisine', 'up_save_cuisine_meta');
 add_action('cuisine_edit_form_fields', 'up_cuisine_edit_form_fields');
@@ -54,3 +54,5 @@ add_action('admin_post_up_save_options', 'up_save_options');
 add_action('admin_enqueue_scripts', 'up_admin_enqueue');
 add_action('init', 'up_register_assets');
 add_action('admin_init', 'up_settings_api');
+add_action('enqueue_block_editor_assets', 'up_enqueue_block_editor_assets');
+add_action('wp_head', 'up_wp_head');
