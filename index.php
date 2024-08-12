@@ -54,5 +54,5 @@ add_action('admin_post_up_save_options', 'up_save_options');
 add_action('admin_enqueue_scripts', 'up_admin_enqueue');
 add_action('init', 'up_register_assets');
 add_action('admin_init', 'up_settings_api');
-add_action('enqueue_block_editor_assets', 'up_enqueue_block_editor_assets');
+add_action('enqueue_block_assets', 'up_enqueue_block_assets');
 add_action('wp_head', 'up_wp_head');

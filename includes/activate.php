@@ -5,7 +5,7 @@ function up_activate_plugin() {
         wp_die(__("you must update wordpress to use this function", "udemy-plus"));
     }
 
-    up_recipe_post_type();
+    up_register_custom_post_type();
     flush_rewrite_rules();
 
     global $wpdb;

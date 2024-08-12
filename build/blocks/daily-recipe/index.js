@@ -293,7 +293,14 @@ __webpack_require__.r(__webpack_exports__);
       title: null
     });
 
-    /*useEffect(async () => {
+    /* 
+     
+     * This is the original code, which casuses
+     * the block editor page to break if daily-recipe
+     * is removed/deleted from the editor. This is bad.
+      
+     
+    useEffect(async () => {
       const response = await apiFetch({
         path: 'up/v1/daily-recipe',
       });
@@ -301,7 +308,9 @@ __webpack_require__.r(__webpack_exports__);
         isLoading: false,
         ...response
       });
-     }, []) */
+     }, [])
+    
+    */
 
     (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.useEffect)(() => {
       let isMounted = true;

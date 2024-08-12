@@ -98,19 +98,20 @@ function up_register_custom_post_type() {
 		'show_in_rest'	=>	true
 	]);
 
+
+//New Custom post types for Udemy Plus plugin. This will add more field options and meta data
+//for open graph previews.
+//refer to section 16.
+
 	register_post_meta('', 'og_title', [
 		'single' => true,
 		'type' => 'string',
 		'show_in_rest' => true,
 		'sanitize_callback' => 'sanitize_text_field',
 		'auth_callback' => function() {
-			return current_user_can('edit_posts');
+			return current_user_can('edit posts');
 		}
 	]);
-
-//New Custom post types for Udemy Plus plugin. This will add more field options and meta data
-//for open graph previews.
-//refer to section 16.
 
 	register_post_meta('', 'og_description', [
 		'single' => true,

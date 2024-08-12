@@ -26,4 +26,9 @@ function up_register_assets() {
         $editor_asset['version'],
         true
     );
+
+    wp_register_style(
+        'up_neon',
+        plugins_url('/build/block-editor/index.css', UP_PLUGIN_FILE),
+    );
 }

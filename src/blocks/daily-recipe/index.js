@@ -22,9 +22,14 @@ registerBlockType('udemy-plus/daily-recipe', {
       title: null,
     })
 
-
-
-    /*useEffect(async () => {
+    /* 
+     
+     * This is the original code, which casuses
+     * the block editor page to break if daily-recipe
+     * is removed/deleted from the editor. This is bad.
+      
+     
+    useEffect(async () => {
       const response = await apiFetch({
         path: 'up/v1/daily-recipe',
       });
@@ -34,7 +39,9 @@ registerBlockType('udemy-plus/daily-recipe', {
         ...response
       });
 
-    }, []) */
+    }, [])
+    
+    */
       
     useEffect(() => {
       let isMounted = true;
@@ -67,7 +74,7 @@ registerBlockType('udemy-plus/daily-recipe', {
       return () => {
         isMounted = false;
       }
-      }, []);
+      }, []); 
 
     return (
       <div {...blockProps}>
