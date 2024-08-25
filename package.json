@@ -21,7 +21,7 @@
   "author": "Some Rando",
   "license": "ISC",
   "devDependencies": {
-    "@wordpress/scripts": "^28.3.0"
+    "@wordpress/scripts": "^28.5.0"
   },
   "dependencies": {
     "@emotion/cache": "^11.13.0",

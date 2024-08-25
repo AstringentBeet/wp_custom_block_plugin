@@ -13,5 +13,5 @@
             'before'
         ); 
 
-        wp_enqueue_script('up_editor');
+        wp_enqueue_style('up_editor');
     } 

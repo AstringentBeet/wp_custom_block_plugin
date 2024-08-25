@@ -116,7 +116,6 @@ __webpack_require__.r(__webpack_exports__);
 (0,_wordpress_rich_text__WEBPACK_IMPORTED_MODULE_1__.registerFormatType)("udemy-plus/neon", {
   title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)("Neon", "udemy-plus"),
   tagName: "span",
-  className: "neon",
   edit({
     isActive,
     onChange,

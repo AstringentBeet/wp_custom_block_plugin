@@ -18,7 +18,7 @@ function up_register_assets() {
     );
 
     $editor_asset = include(UP_PLUGIN_DIR . 'build/block-editor/index.asset.php');
-
+   
     wp_register_script(
         'up_editor',
         plugins_url('/build/block-editor/index.js', UP_PLUGIN_FILE),
@@ -26,9 +26,8 @@ function up_register_assets() {
         $editor_asset['version'],
         true
     );
-
     wp_register_style(
-        'up_neon',
+        'up_editor',
         plugins_url('/build/block-editor/index.css', UP_PLUGIN_FILE),
     );
 }
