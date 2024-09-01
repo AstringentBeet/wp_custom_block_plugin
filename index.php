@@ -56,3 +56,5 @@ add_action('init', 'up_register_assets');
 add_action('admin_init', 'up_settings_api');
 add_action('enqueue_block_assets', 'up_enqueue_block_assets');
 add_action('wp_head', 'up_wp_head');
+add_action('init', 'up_load_php_translations');
+add_action('wp_enqueue_scripts', 'up_load_block_translations', 100);

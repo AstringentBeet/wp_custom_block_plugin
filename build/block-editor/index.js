@@ -105,23 +105,22 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_rich_text__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/rich-text */ "@wordpress/rich-text");
 /* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
-//https://developer.wordpress.org/block-editor/how-to-guides/format-api/#step-1-register-a-new-format
+/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @wordpress/data */ "@wordpress/data");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
 
 
 
 
 
 
-(0,_wordpress_rich_text__WEBPACK_IMPORTED_MODULE_1__.registerFormatType)("udemy-plus/neon", {
-  title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)("Neon", "udemy-plus"),
-  tagName: "span",
-  edit({
-    isActive,
-    onChange,
-    value
-  }) {
-    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.RichTextToolbarButton, {
+const Neon = ({
+  isActive,
+  onChange,
+  value
+}) => {
+  const selectedBlock = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_4__.useSelect)(select => select('core/block-editor').getSelectedBlock());
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.Fragment, {
+    children: selectedBlock?.name === "core/paragraph" && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.RichTextToolbarButton, {
       title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Neon', 'udemy-plus'),
       icon: "superhero",
       isActive: isActive,
@@ -130,8 +129,14 @@ __webpack_require__.r(__webpack_exports__);
           type: "udemy-plus/neon"
         }));
       }
-    });
-  }
+    })
+  });
+};
+(0,_wordpress_rich_text__WEBPACK_IMPORTED_MODULE_1__.registerFormatType)("udemy-plus/neon", {
+  title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)("Neon", "udemy-plus"),
+  tagName: "span",
+  className: "wp-block-neon",
+  edit: Neon
 });
 
 /***/ }),
