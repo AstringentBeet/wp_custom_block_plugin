@@ -1,7 +1,6 @@
 <?php
 
     function up_header_tools_render_cb($atts){
-
         $user = wp_get_current_user();
         $name = $user->exists() ? $user->user_login : 'sign in';
         $openClass = $user->exists() ? '' : 'open-modal';
